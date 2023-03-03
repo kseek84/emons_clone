@@ -1,0 +1,45 @@
+<style>
+    
+</style>
+<div>
+    <div align="right">
+        <% if(typeof log == "undefined" || log == null) { %> <!-- 비 로그인 -->
+                <a href="memberLogin">
+                    <strong>로그인</strong>
+                </a>
+                <a href="memberJoin">
+                    <strong>회원가입</strong>
+                </a>
+        <% } else { %>  <!-- 로그인 -->
+                <a href="memberInfo?memberId=<%= log %>">
+                    <strong><%= name %> 님</strong>
+                </a>
+                <a href="memberLogout">
+                    <strong>로그아웃</strong>
+                </a>
+        <% } %>
+    </div>
+    <br><br><br>
+    <div align="center">
+        <table>
+            <tr>
+                <td width="200px"><a href="/">에몬스몰</a></td>
+                <td width="1000px">
+                    <form action="itemList">
+                        <input type=text name="search" placeholder="에몬스홈 시그니처 휴에디션">
+                        <input type="image" src="search.png" width="20px">
+                    </form>
+                </td>
+                <td width="400px">
+                    <a href="memberInfo"><img src="profile.png" alt="profile" width="30"></a>&nbsp;
+                    <a href="orderView"><img src="car.png" alt="주문 정보" width="30"></a>&nbsp;
+                    <a href="cartView"><img src="cart.png" alt="cart" width="30"></a>&nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br><br><br>
+    <div>
+        
+    </div>
+</div>

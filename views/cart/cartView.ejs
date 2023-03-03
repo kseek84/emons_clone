@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - 장바구니</title>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <% if(typeof log == "undefined" || log == null) { %>
+        <div align="center">
+            <h1><a href="memberLogin">로그인</a></h1>
+        </div>
+    <% } else if(cart.length == 0){ %>
+        <div align="center">
+            <h1><a href="itemListAll">장바구니가 비었습니다.</a></h1>
+        </div>
+    <% } else { %>
+    <div align="center">
+        <h1><%= name %> 님 장바구니</h1>
+        <table>
+            <tr>
+                <td align="center">상품</td>
+                <td align="center">이름</td>
+                <td align="center">수량</td>
+                <td align="center">가격</td>
+                <td align="center">총 가격</td>
+                <td align="center">삭제</td>
+            </tr>
+            <% var totalCount = 0; %>
+            <% for(var i in cart) { %>
+                <% totalCount += cart[i]["cartItemCount"]; %>
+            <tr>
+                <td><a href="itemView?itemNo=<%= cart[i]["cartItemNo"] %>"><img alt="상품 이미지" width="100px" height="100px" src=<%= cart[i]["cartItemImage"] %>></a></td>
+                <td><a href="itemView?itemNo=<%= cart[i]["cartItemNo"] %>"><%= cart[i]["cartItemName"] %></a></td>
+                <td align="center"><%= cart[i]["cartItemCount"] %>개</td>
+                <td><%= cart[i]["cartItemPrice"] %>원</td>
+                <td><%= cart[i]["cartItemPrice"] * cart[i]["cartItemCount"] %>원</td>
+                <% var cartItemNo = cart[i]["cartItemNo"] %>
+                <td><button onclick="location.href='cartDelete?cartItemNo=<%= cartItemNo %>'">삭제</button></td>
+            </tr>
+            <% } %>
+            <tr>
+                <td colspan="2"></td>
+                <td><%= totalCount %>개</td>
+                <td></td>
+                <td>                    
+                <% 
+                    var total = 0;
+                    for(var i in cart){
+                        total += cart[i]["cartItemPrice"] * cart[i]["cartItemCount"];
+                    }
+                %>
+                <%= total %>원
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <a href="orderCart">
+                        주문하기
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <% } %>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

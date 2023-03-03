@@ -1,0 +1,259 @@
+<style>
+    #top td{
+        padding: 0 10px;
+    }
+    a {text-decoration: none;}
+    #logo{
+        filter: brightness(0) invert(1);
+        margin: 0, 100px, 0, 0;
+        align-items: left;
+    }
+    #icon{
+        filter: brightness(0) invert(1);
+        padding: 0 20px;
+    }
+    #topbar{
+        background-image: url(back.jpg);
+        height: 100px;
+        margin: 20px 0 0 0;
+        width: 100%;
+    }
+    input::placeholder{
+        font-size: 0.8em;
+    }
+    input{
+        width: 389px;
+        height: 30px;
+    }
+    .snow{
+        vertical-align: bottom;
+    }
+    #search{
+        border-radius: 20px;
+    }
+    #all_menu{
+        font-weight: 700;
+        background-image: url(menu.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        font-size: 16px;
+        color: black;
+        padding: 0 0 0 25px;
+    }
+    #menu{
+        background-color: white;
+    }
+    #menu_list li{
+        float: left;
+        list-style: none;
+        padding: 10px 30px;
+        line-height: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        color: black;
+    }
+    #all_menu select:hover, option {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .dropmenu {
+        font-weight: 700;
+        background-image: url(menu.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        padding: 0 0 0 25px;
+        font-size: 16px;
+        color: black;
+    }
+    
+    .dropmenu {
+        border: none;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    .dropmenu ul {
+        height: 100px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .dropmenu li {
+        float: left;
+        padding: 0px;
+    }
+    .dropmenu li a {
+        display: block;
+        line-height: 100px;
+        margin: 0px;
+        padding: 0px 25px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+    }
+    .dropmenu li a:hover, .dropmenu ul li:hover a {
+        text-decoration: none;
+        font-size: 16px;
+        color: black;
+    }
+    .dropmenu li ul {
+        display: none;
+        height: auto;
+        border: 0px;
+        position: absolute;
+        width: 200px;
+        z-index: 200;
+    }
+    .dropmenu li:hover ul {
+        display: block;
+    }
+    .dropmenu li li {
+        display: block;
+        float: none;
+        margin: 0px;
+        padding: 0px;
+        width: 200px;
+        height: 50px;
+    }
+    .dropmenu li:hover li a {
+        background: white;
+    }
+    .dropmenu li ul a {
+        display: block;
+        height: 80px;
+        font-size:14px;
+        margin: 0px;
+        padding: 0px 10px 0px 15px;
+        text-align:left;
+    }
+    .dropmenu li ul a:hover, .dropmenu li ul li:hover a {
+        border: 0px;
+        text-decoration: underline;
+        font-size: 16px;
+        color: black;
+    }
+    .dropmenu p {
+        clear:left;
+    }
+</style>
+
+<!--상단바-->
+<table width="1200px" align="center">
+    <tr>
+        <td>
+            <div align="right">
+                <table id="top">
+                    <tr>
+                        <td align="center"><a href="#">
+                            <font size="1" color="gray">
+                                <strong>회사소개</strong>
+                            </font>
+                        </a></td>
+                        <% if(typeof log == "undefined" || log == null) { %> <!-- 비 로그인 -->
+                            <td align="center">
+                                <a href="memberLogin">
+                                    <font size="1" color="gray"><strong>로그인</strong></font>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a href="memberJoin">
+                                    <font size="1" color="gray"><strong>회원가입</strong></font>
+                                </a>
+                            </td>
+                        <% } else { %>  <!-- 로그인 -->
+                            <td align="center">
+                                <a href="memberInfo?memberId=<%= log %>">
+                                    <font size="1" color="gray"><strong><%= name %> 님</strong></font>
+                                </a>
+                            </td>
+                            <td align="center">
+                                <a href="memberLogout">
+                                    <font size="1" color="gray"><strong>로그아웃</strong></font>
+                                </a>
+                            </td>
+                        <% } %>
+                        <td align="center"><a href="#">
+                            <font size="1" color="gray">
+                                <strong>고객지원</strong>
+                            </font>
+                        </a></td>
+                    </tr>
+                </table>       
+            </div>
+        </td>
+    </tr>
+</table>
+<div id="topbar" align="center">
+    <table width="1200px">
+        <tr>
+            <td id="logo" height="100px" align="left">
+                <a href="/"><img src="https://emons2233.cdn-nhncommerce.com/data/skin/front/emons_vreviewx_0522/img/common/home_logo.svg" alt="에몬스" width="270px"></a>
+            </td>
+            <td>
+                <div style="position: relative;">
+                <form action="itemList">
+                    <input type="text" id="search" style="border: solid 2px;" placeholder="  에몬스홈 시그니처 휴에디션" name="search">
+                        <div style="position: absolute; right: 80px; top: 10px;">
+                            <!-- <a href="#"><img src="search.png" alt="서치" width="20px"></a> -->
+                            <input type="image" src="search.png" alt="서치" style="width:20px;">
+                        </div>
+                </form>
+                </div>
+            </td>
+            <td id="snow" class="snow">
+                <div style="position:relative">
+                    <img src="treeani.gif" alt="tree" width="160">
+                    <div style="position: absolute; left: 80px; top: 10px;">
+                        <img src="snowman.gif" alt="snowman" width="60">
+                    </div>
+                </div>
+            </td>
+            <td id="icon">
+                <a href="#"><img src="heart.png" alt="heart" width="30"></a>&nbsp;
+                <a href="memberInfo"><img src="profile.png" alt="profile" width="30"></a>&nbsp;
+                <a href="orderView"><img src="car.png" alt="주문 정보" width="30"></a>&nbsp;
+                <a href="cartView"><img src="cart.png" alt="cart" width="30"></a>&nbsp;
+            </td>
+        </tr>
+    </table>
+</div>
+<!--카테고리 리스트-->
+<div id="menu">
+    <table width="1200px" align="center">
+        <tr align="left">
+            <td>
+                <div class="dropmenu">
+                    <ul>
+                        <li>
+                            <a id="current" href="itemList?category=전체">전체 카테고리</a>
+                            <ul>
+                                <li><a href="itemList?category=거실가구">거실가구</a></li>
+                                <li><a href="itemList?category=침실가구">침실가구</a></li>
+                                <li><a href="itemList?category=매트리스">매트리스</a></li>
+                                <li><a href="itemList?category=주방가전">주방가전</a></li>
+                                <li><a href="itemList?category=식탁">식탁</a></li>
+                                <li><a href="itemList?category=소파">소파</a></li>
+                                <li><a href="itemList?category=서랍장/수납장">서랍장/수납장</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <ul id="menu_list">
+                    <a href="#"><li>비밀특가</li></a>
+                    <a href="#"><li>쿠쿠최저가</li></a>
+                    <a href="#"><li>NEW</li></a>
+                    <a href="#"><li>베스트50</li></a>
+                    <a href="#"><li>입점샵#</li></a>
+                    <a href="#"><li>이벤트</li></a>
+                    <a href="reviewList"><li>고객리뷰</li></a>
+                    
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <hr color="gray" size="1">
+</div>

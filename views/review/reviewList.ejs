@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - reviewList</title>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <div align="center">
+        <h1>상품 후기</h1>
+        <table>
+            <% if(typeof log != "undefined" && log != null && log != "") { %> <!--로그인한 회원만 후기 작성 가능-->
+                <tr><td colspan="10" align="right"><button onclick="location.href='reviewWrite'">후기 작성</button></td></tr>
+            <% } else { %>
+                <tr><td colspan="10" align="right"><button onclick="location.href='memberLogin'">후기 작성</button></td></tr>
+            <% } %>
+                <tr><td colspan="10" align="left">
+                    <a href="reviewList?sort=reviewNo">최신순</a> &nbsp; &nbsp; 
+                    <a href="reviewList?sort=reviewScore">평점순</a> &nbsp; &nbsp; 
+                    <a href="reviewList?sort=reviewLike">추천순</a> &nbsp; &nbsp; 
+                </td></tr>
+        <% for(var i in reviewDB) { var r = reviewDB[i]; %>
+            <% if(Number(i) % 4 == 0) { %>
+                <tr>
+            <% } %>
+                <td style="text-align: justify;">
+                    <a href="itemView?itemNo=<%= r["reviewItemNo"] %>">
+                        <img width="285px" height="285px" alt="리뷰 이미지" src="<%= r["reviewImage"] %>.jpg">
+                    </a><br>
+                   <%
+                        var name = r["memberName"];
+                   %>
+                    <div style="display:flex;justify-content: space-between;">
+                        <div>
+                            <%= name %>         
+                        </div>
+                        <div>
+                            <%= r["reviewDate"] %>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td rowspan="2"><img width="50px" height="50px" alt="상품 이미지" src="<%= r["itemImg"] %>"></td>
+                            <td colspan="2" width="100%">
+                                <a href="review?reviewNo=<%= r["reviewNo"] %>">
+                                    <%= r["reviewContent"].substring(0, 15) %>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="reviewList?itemNo=<%= r["reviewItemNo"] %>">리뷰 <%= r["reviewCount"] %></a>
+                            </td>
+                            <td align="right">
+                                평점 <%= r["reviewScore"] %>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </td>
+            <% if(Number(i) % 4 == 3) { %>
+                </tr>
+            <% } %>
+        <% } %>
+        <tr>
+            <td colspan="4" align="center">
+                <% if(prev >= 1) { %>
+                    <a href="reviewList?page=<%= prev %>">[<< 이전]</a>    
+                <% } %>
+                
+                <% for(var i = pagingStart; i <= pagingEnd; i++) { %>
+                        <a href="reviewList?page=<%= i %>"> &nbsp; <%= i %> &nbsp; </a>
+                <% } %>
+                
+                <% if(next != -1) {%>
+                    <a href="reviewList?page=<%= next %>">[이후 >>]</a>
+                <% } %>
+            </td>
+        </tr>
+        </table>
+    </div>
+    
+    <%- include("../footer.ejs") %>
+</body>
+</html>

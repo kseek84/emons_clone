@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - Join</title>
+    <style>
+        .join-btn {
+            width: 600px;
+            height: 50px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    <div align="center">
+        <h1>회원가입</h1>
+        <h3>에몬스홈 회원만을 위한 다양한 혜택</h3>
+        <img src="event_sale.jpg" alt="event_sale">
+        <br><br>
+        <div class="join-btn" onclick="location.href='memberJoinForm'">
+            회원가입하고 혜택받기
+        </div>
+        <br><hr width="600px">
+        <font color="gray">SNS로 간편 회원가입</font>
+        <br><br><br>
+        <table width="600px">
+            <tr align="center">
+                <td>
+                    <img style="border-radius:70%" src="sns_login_naver.jpg" alt="네이버"><br>
+                    네이버 간편가입
+                </td>
+                <td>
+                    <img style="border-radius:70%" src="sns_login_kakao.jpg" alt="카카오"><br>
+                    카카오 간편가입
+                </td>
+                <td>
+                    <img style="border-radius:70%" src="sns_login_facebook.jpg" alt="페이스북"><br>
+                    페이스북 간편가입
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br><br><br>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - item list all</title>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    <div align="center">
+        <h1><%= category %> 상품</h1>
+        <table width="70%">
+            <tr><td width="228px"></td><td width="228px"></td><td width="228px"></td><td width="228px"></td><td width="228px"></td></tr>
+            <% for(var i in itemDB) { %>
+            <% if(Number(i) % 5 == 0) { %>
+                <tr>
+            <% } %>
+                <td width="228px">
+                    <a href="itemView?itemNo=<%= itemDB[i]["itemNo"] %>">
+                        <img widht="224px" height="224px" alt="상품이미지" src="<%= itemDB[i]["itemImg"] %>" >
+                        <br>
+                        <%= itemDB[i]["itemName"] %>
+                    </a>
+                    <br>
+                    <%
+                        var price = itemDB[i]["itemPrice"] * (100 - itemDB[i]["itemDiscount"]) / 100;
+                        price = Math.floor(price);
+                    %>
+                    <b><%= price %></b>
+                    <br>
+                    <font color="blue"><%= itemDB[i]["itemDiscount"] %>%</font> <font color="gray" style="text-decoration:line-through"><%= itemDB[i]["itemPrice"] %></font>
+                </td>
+            <% if(Number(i) % 5 == 4) {%>
+                </tr>
+                <tr><td colspan="5"><hr></td></tr>
+            <% } %>
+            <% if(i == itemDB.length - 1) {%>
+                </tr>    
+            <% } %>
+            <% } %>
+        </table>
+        
+    </div>
+    <br><br><br><br><br>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

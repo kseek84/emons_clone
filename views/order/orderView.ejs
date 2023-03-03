@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - 주문정보</title>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <% if(typeof log == "undefined" || log == null) { %>
+        <div align="center">
+            <h1><a href="memberLogin">로그인</a></h1>
+        </div>
+    <% } else if(order.length == 0){ %>
+        <div align="center">
+            <h1><a href="itemListAll">주문 내역이 없습니다.</a></h1>
+        </div>
+    <% } else { %>
+    <div align="center">
+        <h1><%= name %> 님 주문정보</h1>
+        <table>
+            <tr>
+                <td align="center">상품</td>
+                <td align="center">이름</td>
+                <td align="center">수량</td>
+                <td align="center">가격</td>
+                <td align="center">총 가격</td>
+            </tr>
+            <% var totalCount = 0; %>
+            <% for(var i in order) { %>
+                <% totalCount += order[i]["orderItemCount"]; %>
+            <tr>
+                <td><a href="itemView?itemNo=<%= order[i]["orderItemNo"] %>"><img alt="상품 이미지" width="100px" height="100px" src=<%= order[i]["orderItemImage"] %>></a></td>
+                <td><a href="itemView?itemNo=<%= order[i]["orderItemNo"] %>"><%= order[i]["orderItemName"] %></a></td>
+                <td align="center"><%= order[i]["orderItemCount"] %>개</td>
+                <td><%= order[i]["orderItemPrice"] %>원</td>
+                <td><%= order[i]["orderItemPrice"] * order[i]["orderItemCount"] %>원</td>
+            </tr>
+            <% } %>
+            <tr>
+                <td colspan="2"></td>
+                <td><%= totalCount %>개</td>
+                <td></td>
+                <td>                    
+                <% 
+                    var total = 0;
+                    for(var i in order){
+                        total += order[i]["orderItemPrice"] * order[i]["orderItemCount"];
+                    }
+                %>
+                <%= total %>원
+                </td>
+            </tr>
+        </table>
+        <br><br><br><br><br>
+        <a href="orderDelete">주문 내역 삭제</a>
+        <br><br><br><br><br>
+    </div>
+    
+    <% } %>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

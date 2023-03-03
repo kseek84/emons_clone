@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - item View</title>
+    <style>
+        td {text-align:center;}
+    </style>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <div align="center">
+        <table>
+            <tr>
+                <td rowspan="11">
+                    <img alt="상품 이미지" src="<%= item["itemImg"] %>">
+                </td>
+                <td colspan="2" align="center">
+                    <b><%= item["itemName"] %></b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%
+                        var price0 = item["itemPrice"];
+                        var discount = item["itemDiscount"];
+                        var price = price0 * (100 - discount) / 100;
+                        price = Math.floor(price);
+                    %>
+                    <b><%= price %>원</b>
+                </td>
+                <td>
+                    <font style="text-decoration:line-through;opacity:40%"><%= price0 %>원</font> <%= discount %>% 할인
+                </td>
+            </tr>
+            <tr>
+                <td>구매혜택</td>
+                <td>적립 마일리지 : +880원 (상품 : 880원)</td>
+            </tr>
+            <tr>
+                <td>배송비</td>
+                <td>무료배송(일부 제외, 상세페이지 하단 참조)</td>
+            </tr>
+            <tr>
+                <td>모델명</td>
+                <td><%= item["itemModel"] %></td>
+            </tr>
+            <tr>
+                <td>브랜드</td>
+                <td>에몬스</td>
+            </tr>
+            <tr>
+                <td>카드할부 혜택</td>
+                <td><a href="#">무이자 행사안내</a></td>
+            </tr>
+            <tr>
+                <td>선택</td>
+                <td>
+                    <select>
+                        <option>= 선택 선택 =</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>색상</td>
+                <td>
+                    <select>
+                        <option><font color="gray" style="opacity:20%">= 선택을 먼저 선택해 주세요 =</font></option>
+                    </select>
+                </td>
+            </tr>
+            <form action="cartAdd">
+            <tr>
+                <td>수량</td>
+                <td>
+                    
+                    <input type="number" name="itemCount" value="1" min="1" style="width:50px">
+                </td>
+            </tr>
+            <tr align="center">
+                <% if(typeof log == "undefined" || log == null) { %>
+                    <td colspan="2"><a href="memberLogin">로그인</a></td>
+                <% } else { %>
+                <td style="width:200px;"><a href="#">바로구매</a></td>
+                <td><input type="submit" value="장바구니에 추가"></td>
+                <input type="hidden" name="itemNo" value="<%= item["itemNo"] %>">
+                <% } %>
+            </tr>
+            </form>
+        </table>
+        
+    </div>
+    <br><br><br><br><br>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

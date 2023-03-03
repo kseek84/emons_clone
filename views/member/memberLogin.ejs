@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - Login</title>
+    <style>
+        .member-login-btn {
+            width: 300px;
+            height: 50px;
+            background-color: black;
+            font-size: 16px;
+        }
+        .member-login-btn a {
+            color: white;
+        }
+        .nonmember-login-btn {
+            width: 300px;
+            height: 50px;
+            font-size: 16px;
+            border: 1px solid black;
+        }
+        .login-table tr td input{
+            width: 400px;
+            height: 45px;
+        }
+        .login-table tr td input.login-btn {
+            width: 200px;
+            height: 100px;
+            background-color: black;
+            font-size: 16px;
+            color: white;
+        }
+        .login-table tr td input.checkbox {
+            width: 30px;
+        }
+        .join-btn {
+            width: 200px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            padding-top: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    <div align="center">
+        <h1>로그인</h1>
+        <button class="member-login-btn"><a href="#">회원 로그인</a></button>
+        <button class="nonmember-login-btn"><a href="#">비회원 주문조회</a></button>
+        <br><br>
+        <form action="memberLoginPro">
+            <table class="login-table">
+                <tr>
+                    <td><input type=text name="id" placeholder="아이디"></td>
+                    <td rowspan="2">
+                        <input class="login-btn" type="submit" value="로그인">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="pw" placeholder="비밀번호"></td>
+                </tr>
+                <tr>
+                    <td><input class="checkbox" type="checkbox"> 아이디 저장</td>
+                    <td>
+                        <a href="#">아이디 찾기</a>
+                        <a href="#">비밀번호 찾기</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <br><hr width="700px">
+        <font color="gray" size="2">아직 회원이 아니신가요?</font>
+        <br><br>
+        <table width="700px">
+            <tr>
+                <td text-align="left">
+                    지금 가입하면,<br>
+                    <font color="#14008c">2% 추가 할인 + 1만 마일리지 + 앱 3% 할인쿠폰</font> 제공
+                </td>
+                <td>
+                    <div class="join-btn" onclick="location.href='memberJoin'">회원가입</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <%- include("../footer.ejs") %>
+</body>
+</html>

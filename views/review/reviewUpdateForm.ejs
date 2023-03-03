@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall review update form</title>
+    <style> td {text-align:center;} </style>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <div align="center">
+        <h1>후기 수정</h1>
+        <form action="reviewUpdatePro">
+            <table>
+                <tr>
+                    <td>상품</td>
+                    <td>
+                        <%= review["reviewItemNo"] %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>별점</td>
+                    <td>
+                        <select name="score" required>
+                            <option value="">상품 별점</option>
+                            <% for(var i = 1; i < 6; i++) { %>
+                                <% if(i == review["reviewScore"]) { %>
+                                    <option value="<%= i %>" selected><%= i %></option>
+                                <% } else { %>
+                                    <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>후기 내용</td>
+                    <td style="padding:50px">
+                        <textarea rows="10" cols="50" name="content" required><%= review["reviewContent"] %></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>파일</td>
+                    <td style="padding-left:100px">
+                        <input type="file" name="image" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="작성완료">
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="reviewNo" value="<%= review["reviewNo"] %>">
+        </form>
+        <br><br><br>
+        <a href="reviewDeletePro?reviewNo=<%= review["reviewNo"] %>">리뷰 삭제</a>
+    </div>
+    
+    <%- include("../footer.ejs") %>
+</body>
+</html>

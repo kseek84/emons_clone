@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emonsmall - review</title>
+</head>
+<body>
+    <%- include("../header.ejs") %>
+    
+    <div align="center">
+        <h1>상품 후기</h1>
+        <hr>
+        <% 
+            var score = review["reviewScore"];
+            var star = "";
+            for(var i = 0; i < score; i++){ 
+                star += "★";
+            }
+            for(var i = score; i < 5; i++){
+                star += "☆";
+            }
+            var msg;
+            if(score < 1){
+                msg = "완전 별로에요";
+            } else if (score < 2){
+                msg = "별로에요";
+            }
+            else if (score < 3){
+                msg = "보통이에요";
+            }
+            else if (score < 4){
+                msg = "좋아요";
+            }
+            else if (score < 5){
+                msg = "맘에 들어요";
+            }
+            else {
+                msg = "아주 좋아요";
+            }
+        %>
+        <%= star %>  <%= msg %>
+        <table border="1">
+            <tr>
+                
+                <td rowspan="2"><a href="itemView?itemNo=<%= review["reviewItemNo"] %>"><img width="48px" height="48px" alt="상품 이미지" src="<%= review["itemImg"] %>"></a></td>
+                <td><a href="itemView?itemNo=<%= review["reviewItemNo"] %>"><%= itemName %></a></td>
+                
+            </tr>
+            <tr>
+                <td>★ <%= itemScore %> <a href="reviewList?itemNo=<%= review["reviewItemNo"] %>">리뷰 <%= review["reviewCount"] %></a></td>
+            </tr>
+            <tr>
+                <td colspan="2"><%= review["reviewContent"] %></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img width="132px" height="132px"  alt="리뷰 이미지" src="<%= review["reviewImage"] %>.jpg">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <% if(typeof log == "undefined" || log == null || log == "") { %>
+                        도움돼요(<%= review["reviewLike"] %>)
+                        도움안돼요(<%= review["reviewDislike"] %>)
+                    <% } else { %>
+                        <a href="reviewLike?reviewNo=<%= review["reviewNo"] %>">도움돼요</a>(<%= review["reviewLike"] %>)
+                        <a href="reviewDislike?reviewNo=<%= review["reviewNo"] %>">도움안돼요</a>(<%= review["reviewDislike"] %>)
+                    <% } %>
+                </td>
+            </tr>
+        </table>
+        <% if(memberNo == review["reviewMemberNo"]) { %>
+            <br><br><br>
+            <a href="reviewUpdateForm?reviewNo=<%= review["reviewNo"] %>">리뷰 수정</a>
+        <% } %>
+        <br><br><br>
+        <a href="reviewList">돌아가기</a>
+            
+    </div>
+    
+    <%- include("../footer.ejs") %>
+</body>
+</html>
